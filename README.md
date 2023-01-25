@@ -6,7 +6,7 @@ The biggest difference between *Quizlet* and **Gatorlet** will be the price. Cur
 
 Some features we hope to implement include sorting the order of concepts alphabetically or choosing to shuffle them. Another is having a home page with folders for different sets of flashcards. And some others which could be implemented if time permits is an interface option to print a set of flashcards, and possibly add flashcard libraries from Quizlet or the internet.
 
-### Members
+### Members - Group 97
 
 Front End:
 - Alex Harvey
