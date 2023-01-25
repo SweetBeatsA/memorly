@@ -6,7 +6,7 @@ The biggest difference between *Quizlet* and **Gatorlet** will be the price. Cur
 
 Some features we hope to implement include sorting the order of concepts alphabetically or choosing to shuffle them.
 
-### Memebers
+### Members
 
 Front End:
 - Alex Harvey
