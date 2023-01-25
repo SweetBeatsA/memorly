@@ -6,13 +6,10 @@ The biggest difference between the *Quizlet* and the **Gatorlet** will be the pr
 
 ### Memebers
 
-- Alex Harvey
-- Brien Boudreau
-- DongGun Yoon
-- Rodolfo De Armas
-
 Front End:
 - Alex Harvey
+- Brien Boudreau
 
 Back End:
 - DongGun Yoon
+- Rodolfo De Armas
