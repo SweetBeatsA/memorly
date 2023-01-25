@@ -10,3 +10,9 @@ The biggest difference between the *Quizlet* and the **Gatorlet** will be the pr
 - Brien Boudreau
 - DongGun Yoon
 - Rodolfo De Armas
+
+Front End:
+- Alex Harvey
+
+Back End:
+-DongGun Yoon
