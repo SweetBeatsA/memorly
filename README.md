@@ -4,6 +4,8 @@ The problem that we are trying to solve is what we see as the weakness of *Quizl
 
 The biggest difference between *Quizlet* and **Gatorlet** will be the price. Currently, *Quizlet* is only providing limited features for those who use it freely, while **Gatorlet** will have all features available for free. We believe that every user is valuable since they could be a student, instructor, or friend. Therefore, we will minimize the profit that the service takes to maximize the user experience. That being said, **Gatorlet** will have limited features when compared with the full version of *Quizlet*.
 
+Some features we hope to implement include sorting the order of concepts alphabetically or choosing to shuffle them.
+
 ### Memebers
 
 Front End:
