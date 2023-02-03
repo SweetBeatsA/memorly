@@ -1,17 +1,27 @@
-# Gatorlet
+# CEN3031Project
 
-The problem that we are trying to solve is what we see as the weaknesses of *Quizlet*. We are trying to create software that can help and teach people who are seeking information. Along with that, we are also going to support self-studying options for people seeking to memorize or prepare for tests.  
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4.
 
-The biggest difference between *Quizlet* and **Gatorlet** will be the price. Currently, *Quizlet* is only providing limited features for those who use it freely, while **Gatorlet** will have all features available for free. We believe that every user is valuable since they could be a student, instructor, or friend. Therefore, we will minimize the profit that the service takes to maximize the user experience. That being said, **Gatorlet** will have limited features when compared with the full version of *Quizlet*.
+## Development server
 
-Some features we hope to implement include creating a user log-in system where members can create and publish their flashcards, as well as view and use those made by other users.  While studying, users will be able to sort the order of concepts (flashcards) alphabetically or choose to shuffle them. Users can self-mark cards as 'mastered' or 'unsure' which can cause a given card to appear more or less frequently in a study session. Another is having a home page with folders for different sets of flashcards. And some others which could be implemented if time permits is fancy animations for the cards flipping over, an interface option to print a set of flashcards, and possibly adding flashcard libraries from Quizlet or the internet.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-### Members - Group 97
+## Code scaffolding
 
-Front End:
-- Alex Harvey
-- Brien Boudreau
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-Back End:
-- DongGun Yoon
-- Rodolfo De Armas
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
