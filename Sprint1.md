@@ -13,11 +13,13 @@ As a **high school student who likes to start studying early**, I want **to be a
 # **What issues your team planned to address**
 
 - Have a working website that can be accessed from any computer via link
+Front end:
 - Have input boxes for flash card front and back sides
 - Display flash card and have the option to flip it
 - Have text input centered, look like a flash card
 - Look into web templates
 - Add color
+Back end:
 
 # **Which issues were successfully completed**
 
