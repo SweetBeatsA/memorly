@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 type User struct {
@@ -13,21 +14,15 @@ type User struct {
 	Password string `json:"password"`
 }
 
-type CreateUserInput struct {
+type CreateUserForm struct {
 	Email    string `json:"email" binding:"required"`
 	Name     string `json:"name" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
-type UpdateUserInput struct {
+type UpdateUserForm struct {
 	Email string `json:"email" binding:"required"`
 	Name  string `json:"name" binding:"required"`
-}
-
-type UserResponse struct {
-	Id    int    `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
 }
 
 var users = []User{
@@ -37,23 +32,36 @@ var users = []User{
 }
 
 func createUser(c *gin.Context) {
-	var input CreateUserInput
+	var form CreateUserForm
 
-	if err := c.ShouldBindJSON(&input); err != nil {
+	if err := c.ShouldBindJSON(&form); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
-
 		return
 	}
 
-	user := User{Id: len(users) + 1, Name: input.Name, Email: input.Email, Password: input.Password}
+	highest := 0
+
+	for _, user := range users {
+		if user.Email == form.Email {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"message": "Email already used",
+			})
+			return
+		}
+
+		if user.Id > highest {
+			highest = user.Id
+		}
+	}
+
+	user := User{Id: highest + 1, Name: form.Name, Email: form.Email, Password: form.Password}
 	users = append(users, user)
-	userResponse := user
 
 	c.JSON(http.StatusOK, gin.H{
-		"status": 200,
-		"data":   userResponse,
+		"message": "Successfully Created",
+		"data":    user,
 	})
 }
 
@@ -62,7 +70,6 @@ func getUser(c *gin.Context) {
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"status":  404,
 			"message": "Not a proper id",
 		})
 		return
@@ -71,51 +78,67 @@ func getUser(c *gin.Context) {
 	for _, user := range users {
 		if user.Id == id {
 			c.JSON(http.StatusOK, gin.H{
-				"status": 200,
-				"data":   user,
+				"data": user,
 			})
+			return
 		}
 	}
 
 	c.JSON(http.StatusBadRequest, gin.H{
-		"status":  404,
 		"message": "User not found",
 	})
 }
 
 func getUsers(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
-		"status": 200,
-		"data":   users,
+		"data": users,
 	})
 }
 
 func updateUser(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
-	var input UpdateUserInput
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status":  400,
-			"message": "No id",
+			"message": "Not a proper id",
 		})
 		return
 	}
 
-	if err := c.ShouldBindJSON(&input); err != nil {
+	var form UpdateUserForm
+
+	if err := c.ShouldBindJSON(&form); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
-
 		return
 	}
 
-	user := User{Id: id, Name: input.Name, Email: input.Email, Password: "password"}
-	userResponse := user
+	for _, user := range users {
+		if user.Email == form.Email {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"message": "Email already used",
+			})
+			return
+		}
+	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"status": 200,
-		"data":   userResponse,
+	for i, user := range users {
+		if user.Id == id {
+			users[i].Name = form.Name
+			users[i].Email = form.Email
+
+			c.JSON(http.StatusOK, gin.H{
+				"message": "Successfully Updated",
+				"data":    users[i],
+			})
+			return
+		}
+	}
+
+	c.JSON(http.StatusBadRequest, gin.H{
+		"message": "User not found",
 	})
 }
 
@@ -125,17 +148,25 @@ func deleteUser(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status":  400,
-			"message": "No id",
+			"message": "Not a proper id",
 		})
 		return
 	}
 
-	user := User{Id: id, Name: "deletedUser", Email: "deleted@google.com", Password: "password"}
-	userResponse := user
+	for i, user := range users {
+		if user.Id == id {
+			users = append(users[:i], users[i+1:]...)
 
-	c.JSON(http.StatusOK, gin.H{
-		"status": 200,
-		"data":   userResponse,
+			c.JSON(http.StatusOK, gin.H{
+				"message": "Successfully Deleted",
+				"data":    user,
+			})
+			return
+		}
+	}
+
+	c.JSON(http.StatusBadRequest, gin.H{
+		"message": "User not found",
 	})
 }
 

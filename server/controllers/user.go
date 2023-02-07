@@ -1,8 +1,10 @@
 package controllers
 
 import (
-	"github.com/gin-gonic/gin"
+	"gin/models"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 type CreateInput struct {
