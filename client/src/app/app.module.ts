@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgMaterialModule } from './ng-material/ng-material.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -14,6 +17,7 @@ import { NgMaterialModule } from './ng-material/ng-material.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgbModule,
     MatSlideToggleModule,
     BrowserAnimationsModule,
     NgMaterialModule
