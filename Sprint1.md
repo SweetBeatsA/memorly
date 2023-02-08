@@ -31,6 +31,12 @@ Front end:
 - Look into web templates
 - Add color
 
+# **Which issues were not completed and why** #
+- We need to understand the animations better before we can have flash cards that flip around.
+- We only have one page at the moment.  We need to figure out what is needed to have more pages.
+- The website looks nice but doesn't have many working buttons.  We need to look into how interacting with a button can update the cards that appear on screen.
+
+
 Back end:
 
 # **Which issues were successfully completed**
