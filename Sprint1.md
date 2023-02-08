@@ -36,6 +36,7 @@ Front end:
 Back end:
 - Connect the frontend to the backend
 - Allow users to create a profile
+- Ability to create a set
 - Save users flashcards so they can edit at any time
 
 # **Which issues were not completed and why** #
@@ -47,6 +48,8 @@ Front end:
 
 
 Back end:
+- We still have the frontend and backend separate so we need to figure out how to implement the two together.
+- We dont have a way to make a set of flashcards or save them.
 
 # **Which issues were successfully completed**
 
@@ -56,3 +59,6 @@ Front end:
 - The webpage is still simple but visually acceptable and neat
 - The webpage has a header with buttons that we plan to link to other pages (ie login pages, about pages, etc) in the future
 - We have cards that accept text input
+
+Back end: 
+- We were successfully able to create accounts for user but in the mock website
