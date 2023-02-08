@@ -7,6 +7,8 @@ As a **student taking Composition 1**, I want to **download flashcards uploaded 
 
 As a **high school student who likes to start studying early**, I want **to be able to save my flashcards** so I can **come back later and continue to study where I left off**.
 
+**Med School** requires a lot of memorization.  I need a space where I can create and save as many **digital flash cards** as I want.
+
 As a **student**, I want to be able to **create and store my own flashcard sets** so that I can **study for exams efficiently**.
 
 As a **teacher**, I want to **create flashcard sets** so that I can **help my students understand the material better**.
@@ -31,7 +33,11 @@ Front end:
 - Look into web templates
 - Add color
 
+Back end:
+
 # **Which issues were not completed and why** #
+
+Front end:
 - We need to understand the animations better before we can have flash cards that flip around.
 - We only have one page at the moment.  We need to figure out what is needed to have more pages.
 - The website looks nice but doesn't have many working buttons.  We need to look into how interacting with a button can update the cards that appear on screen.
@@ -41,4 +47,9 @@ Back end:
 
 # **Which issues were successfully completed**
 
-# **Which issues were not completed and why**
+We created our website! http://flash-study.s3-website-us-east-1.amazonaws.com/
+
+Front end:
+- The webpage is still simple but visually acceptable and neat
+- The webpage has a header with buttons that we plan to link to other pages (ie login pages, about pages, etc) in the future
+- We have cards that accept text input
