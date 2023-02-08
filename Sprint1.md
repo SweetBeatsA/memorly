@@ -19,6 +19,7 @@ As a **student**, I want to **test my understanding of the course material**, so
 
 As a **student**, I want to **be able to share and collaborate my study set with friends**, so I can **study together with more people**.
 
+As a **student**, I want to **randomize flashcards in a library I've created**, so I can **mix up the order I study with them**. 
 
 
 
