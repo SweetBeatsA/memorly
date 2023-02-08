@@ -7,6 +7,16 @@ As a **student taking Composition 1**, I want to **download flashcards uploaded 
 
 As a **high school student who likes to start studying early**, I want **to be able to save my flashcards** so I can **come back later and continue to study where I left off**.
 
+As a **student**, I want to be able to **create and store my own flashcard sets** so that I can **study for exams efficiently**.
+
+As a **teacher**, I want to **create flashcard sets** so that I can **help my students understand the material better**.
+
+As a **user**, I want to **be able to practice my flashcards in a variety of ways**, so that I can **have different modes of studying and understanding my material**.
+
+As a **student**, I want to **test my understanding of the course material**, so that I can **track my progress as I am studying**.
+
+As a **student**, I want to **be able to share and collaborate my study set with friends**, so I can **study together with more people**.
+
 
 
 
