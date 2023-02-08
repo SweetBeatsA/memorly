@@ -34,6 +34,9 @@ Front end:
 - Add color
 
 Back end:
+- Connect the frontend to the backend
+- Allow users to create a profile
+- Save users flashcards so they can edit at any time
 
 # **Which issues were not completed and why** #
 
