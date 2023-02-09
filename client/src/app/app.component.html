@@ -75,15 +75,10 @@ git push
 
 
   <!--
-  Flashcard modal
+  Flashcard box
   Made using Angular Material components
   -->
 
-  
-<!--  <br>
-  <h1 style="text-align:center">Welcome to our CEN3031 Project!</h1>
-
-  <h2 style="text-align:center">Please enter contents of flash card below:</h2> -->
 
 <div class="main-div">
   <td style="text-align: center">
@@ -94,6 +89,7 @@ git push
       <br>
     </mat-card-title>
       
+    <!--Text boxes for card contents-->
     <mat-card-content style = "text-align: center;"> 
       <br>
       <mat-form-field class="example-full-width" appearance="outline">
@@ -106,18 +102,20 @@ git push
         <input matInput placeholder="Enter text">
       </mat-form-field>
     </mat-card-content>
+    
+
+    <!--Button to add card-->
     <mat-card-actions > 
 
-      <button mat-raised-button style="text-align: center">Enter info</button>
+      <div class ="align-center">
+        <button mat-raised-button style="text-align: center">Add card</button>
+
+      </div>
     </mat-card-actions>
+  
   </mat-card>
 </div>
 
 
-  <!--
-  <div class="Enter">
-    <button mat-raised-button color="accent" style="display: inline;">Enter</button>
-  </div>
-  -->
 </section>
 
