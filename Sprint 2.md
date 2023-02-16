@@ -1,5 +1,5 @@
 
-# **What issues your team planned to address**
+# **Issues our team plans to address for Sprint 2**
 
 - Link backend work to Amazon Web Server (AWS)
 - Integrate frontend and backend to create a login page that stores a user's login credentials
