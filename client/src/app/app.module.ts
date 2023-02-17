@@ -14,6 +14,8 @@ import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { CreateCardComponent } from './create-card';
+import { BrowseComponent } from './browse';
+import { LibraryComponent } from './library';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { CreateCardComponent } from './create-card';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    CreateCardComponent
+    CreateCardComponent,
+    BrowseComponent,
+    LibraryComponent
   ],
   imports: [
     BrowserModule,
