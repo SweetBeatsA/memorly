@@ -9,10 +9,20 @@ import { NgMaterialModule } from './ng-material/ng-material.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+//Different web pages
+import { HomeComponent } from './home';
+import { LoginComponent } from './login';
+import { RegisterComponent } from './register';
+import { CreateCardComponent } from './create-card';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent,
+    CreateCardComponent
   ],
   imports: [
     BrowserModule,
