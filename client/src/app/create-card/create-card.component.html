@@ -4,22 +4,21 @@
 <section>
   
   
-    <!--
-    Flashcard box
-    Made using Angular Material components
-    -->
+    
 
   <div class="main-div">
     <td style="text-align: center">
-    <mat-card style="height:120%">
-      <mat-card-title style = "text-align: center;">
+        <mat-card [style.width.px]=500 [style.height.px]=250>
+        
+        <!--Bootstrap component for spacing between elements-->
+        <div class="d-grid gap-2">
+      <mat-card-title>
         <br>
         Create new flashcard
-        <br>
       </mat-card-title>
         
       
-      <mat-card-content style = "text-align: center;"> 
+      <mat-card-content> 
         <br>
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Input front text</mat-label>
@@ -37,11 +36,11 @@
       <mat-card-actions > 
   
         <div class ="align-center">
-          <button mat-raised-button style="text-align: center">Add card</button>
+          <button mat-raised-button>Add card</button>
   
         </div>
       </mat-card-actions>
-    
+    </div>
     </mat-card>
   </div>
   
