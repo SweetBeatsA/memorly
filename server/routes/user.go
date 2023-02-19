@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"gin/controllers"
 	"github.com/gin-gonic/gin"
+	"memorly/controllers"
 )
 
 func UserRoute(router *gin.Engine) {

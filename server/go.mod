@@ -1,4 +1,4 @@
-module gin
+module memorly
 
 go 1.19
 
