@@ -7,6 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"golang.org/x/crypto/bcrypt"
 	"memorly/configs"
 	"memorly/forms"
 	"memorly/models"
@@ -34,11 +35,18 @@ func CreateUser() gin.HandlerFunc {
 			return
 		}
 
+		password := []byte(user.Password)
+		hashedPassword, err := bcrypt.GenerateFromPassword(password, bcrypt.DefaultCost)
+
+		if err != nil {
+			c.JSON(http.StatusBadRequest, responses.UserResponse{Status: http.StatusBadRequest, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+		}
+
 		newUser := models.User{
 			Id:       primitive.NewObjectID(),
 			Name:     user.Name,
 			Email:    user.Email,
-			Password: user.Password,
+			Password: hashedPassword,
 		}
 
 		result, err := userCollection.InsertOne(ctx, newUser)
