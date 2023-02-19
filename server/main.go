@@ -1,13 +1,15 @@
 package main
 
 import (
+	"gin/configs"
 	"gin/controllers"
-
 	"github.com/gin-gonic/gin"
 )
 
 func setupRouter() *gin.Engine {
 	r := gin.Default()
+
+	configs.ConnectDB()
 
 	/* USER */
 	user := new(controllers.UserController)
