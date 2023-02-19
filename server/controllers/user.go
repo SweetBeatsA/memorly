@@ -1,132 +1,71 @@
 package controllers
 
 import (
+	"context"
+	"gin/configs"
 	"gin/forms"
 	"gin/models"
-	"net/http"
-
+	"gin/responses"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
+	"net/http"
+	"time"
 )
 
-type UserController struct{}
+var userCollection *mongo.Collection = configs.GetCollection(configs.DB, "users")
+var validate = validator.New()
 
-var userModel = new(models.UserModel)
+func CreateUser() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		var user forms.RegisterForm
+		defer cancel()
 
-// var userForm = new(models.userForm)
+		if err := c.ShouldBindJSON(&user); err != nil {
+			c.JSON(http.StatusBadRequest, responses.UserResponse{Status: http.StatusBadRequest, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+			return
+		}
 
-// func login(c *gin.Context) {
-// 	var form forms.LoginForm
+		if validationErr := validate.Struct(&user); validationErr != nil {
+			c.JSON(http.StatusBadRequest, responses.UserResponse{Status: http.StatusBadRequest, Message: "error", Data: map[string]interface{}{"data": validationErr.Error()}})
+			return
+		}
 
-// 	if err := c.ShouldBindJSON(&form); err != nil {
-// 		c.AbortWithStatusJSON(http.StatusNotAcceptable, gin.H{
-// 			"message": "Input format is not valid",
-// 		})
-// 		return
-// 	}
+		newUser := models.User{
+			Id:       primitive.NewObjectID(),
+			Name:     user.Name,
+			Email:    user.Email,
+			Password: user.Password,
+		}
 
-// 	token, err := userModel.login(form)
+		result, err := userCollection.InsertOne(ctx, newUser)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+			return
+		}
 
-// 	if err != nil {
-// 		c.AbortWithStatusJSON(http.StatusNotAcceptable, gin.H{
-// 			"message": "Input data is not matched",
-// 		})
-// 		return
-// 	}
-
-// 	c.JSON(http.StatusOK, gin.H{
-// 		"message": "Succesfully Log-in",
-// 		"token":   token,
-// 	})
-// }
-
-func register(c *gin.Context) {
-	var form forms.RegisterForm
-
-	if err := c.ShouldBindJSON(&form); err != nil {
-		c.AbortWithStatusJSON(http.StatusNotAcceptable, gin.H{
-			"message": "Input format is not valid",
-		})
-		return
+		c.JSON(http.StatusCreated, responses.UserResponse{Status: http.StatusCreated, Message: "success", Data: map[string]interface{}{"data": result}})
 	}
-
-	user, err := userModel.register(form)
-
-	if err != nil {
-		c.AbortWithStatusJSON(http.StatusNotAcceptable, gin.H{
-			"message": err.Error(),
-		})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Successfully Registerd",
-		"user":    user,
-	})
 }
 
-func getAll(c *gin.Context) {
-	users, err := userModel.getAll()
+func GetAUser() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		userId := c.Param("userId")
+		var user models.User
+		defer cancel()
 
-	if err != nil {
-		c.AbortWithStatusJSON(http.StatusNotAcceptable, gin.H{
-			"message": "No users to show",
-		})
-		return
+		objId, _ := primitive.ObjectIDFromHex(userId)
+
+		err := userCollection.FindOne(ctx, bson.M{"id": objId}).Decode(&user)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+			return
+		}
+
+		c.JSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "success", Data: map[string]interface{}{"data": user}})
 	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Successfully Get All",
-		"users":   users,
-	})
 }
-
-// func update(c *gin.Context) {
-// 	id, err := strconv.Atoi(c.Param("id"))
-
-// 	if err != nil {
-// 		c.AbortWithStatusJSON(http.StatusNotAcceptable, gin.H{
-// 			"message": "Not a proper id",
-// 		})
-// 		return
-// 	}
-
-// 	var form forms.UpdateForm
-
-// 	user, err := userModel.update
-
-// 	if err := c.ShouldBindJSON(&form); err != nil {
-// 		c.JSON(http.StatusBadRequest, gin.H{
-// 			"error": err.Error(),
-// 		})
-
-// 		return
-// 	}
-
-// 	user := models.User{Id: id, Name: input.Name, Email: input.Email, Password: "password"}
-// 	userResponse := user
-
-// 	c.JSON(http.StatusOK, gin.H{
-// 		"status": 200,
-// 		"data":   userResponse,
-// 	})
-// }
-
-// func delete(c *gin.Context) {
-// 	id, err := strconv.Atoi(c.Param("id"))
-
-// 	if err != nil {
-// 		c.JSON(http.StatusBadRequest, gin.H{
-// 			"status":  400,
-// 			"message": "No id",
-// 		})
-// 		return
-// 	}
-
-// 	user := models.User{Id: id, Name: "deletedUser", Email: "deleted@google.com", Password: "password"}
-// 	userResponse := user
-
-// 	c.JSON(http.StatusOK, gin.H{
-// 		"status": 200,
-// 		"data":   userResponse,
-// 	})
-// }
