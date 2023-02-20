@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"memorly/configs"
 	"memorly/routes"
+
+	"github.com/gin-gonic/gin"
 )
 
 func setupRouter() *gin.Engine {
