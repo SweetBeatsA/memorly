@@ -8,13 +8,15 @@ import (
 )
 
 func setupRouter() *gin.Engine {
-	r := gin.Default()
+	router := gin.New()
+	router.Use(gin.Logger())
 
 	configs.ConnectDB()
 
-	routes.UserRoute(r)
+	routes.AuthRoute(router)
+	routes.UserRoute(router)
 
-	return r
+	return router
 }
 
 func main() {
