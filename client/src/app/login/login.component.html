@@ -6,6 +6,29 @@
 </div>
 
 
+
+
+
+<!--Alternate login form with show/hide password, found at https://nitishkaushik.com/show-hide-password-in-angular-with-angular-material/-->
+<form class="login-form">
+    <h2>Login form</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" name="email">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="showPassword ? 'text' : 'password'" name="password">
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">
+            {{showPassword?'visibility_off':'visibility'}}
+        </mat-icon>
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary">Login</button>
+</form>
+
+
+
+
 <section>
 
     <div class="main-div">
