@@ -25,3 +25,8 @@ mat-card-content {
     flex-direction: column;
     padding: 50px;
 }
+
+.space{
+    height: 100px;
+    
+  }
