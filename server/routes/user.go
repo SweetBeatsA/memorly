@@ -2,11 +2,12 @@ package routes
 
 import (
 	"memorly/controllers"
+	"memorly/middleware"
 
 	"github.com/gin-gonic/gin"
 )
 
 func UserRoute(router *gin.Engine) {
-	router.POST("/user", controllers.CreateUser())
-	router.GET("/users/:userId", controllers.GetAUser())
+	router.Use(middleware.Authenticate())
+	router.GET("/users/:id", controllers.GetUser())
 }
