@@ -37,7 +37,7 @@ func VerifyPassword(userPassword string, providedPassword string) (bool, string)
 	msg := ""
 
 	if err != nil {
-		msg = fmt.Sprintf("password is incorrect")
+		msg = fmt.Sprintf("Password Is Incorrect")
 		check = false
 	}
 	return check, msg
@@ -67,7 +67,7 @@ func SignUp() gin.HandlerFunc {
 		}
 
 		if count > 0 {
-			msg := "email already taken"
+			msg := "Email Already Taken"
 			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: msg, Data: map[string]interface{}{"data": msg}})
 			return
 		}
@@ -111,7 +111,7 @@ func Login() gin.HandlerFunc {
 		err := userCollection.FindOne(ctx, bson.M{"email": user.Email}).Decode(&foundUser)
 		defer cancel()
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "no user matched", Data: map[string]interface{}{"data": err.Error()}})
+			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "No User Matched With Email", Data: map[string]interface{}{"data": err.Error()}})
 			return
 		}
 
