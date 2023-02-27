@@ -66,13 +66,13 @@ func ValidateToken(accessToken string) (signature *Signature, msg string) {
 
 	signature, ok := token.Claims.(*Signature)
 	if !ok {
-		msg = fmt.Sprintf("the token is invalid")
+		msg = fmt.Sprintf("Invalid Token")
 		msg = err.Error()
 		return
 	}
 
 	if signature.ExpiresAt < time.Now().Local().Unix() {
-		msg = fmt.Sprintf("token is expired")
+		msg = fmt.Sprintf("Expired Token")
 		msg = err.Error()
 		return
 	}
