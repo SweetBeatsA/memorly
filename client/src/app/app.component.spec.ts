@@ -30,6 +30,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('CEN3031Project app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('Welcome to our CEN3031 Project!');
   });
 });

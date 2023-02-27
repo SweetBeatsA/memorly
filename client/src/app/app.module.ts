@@ -9,6 +9,8 @@ import { NgMaterialModule } from './ng-material/ng-material.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { HttpClientModule } from '@angular/common/http';
+
 //Different web pages
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
@@ -34,7 +36,8 @@ import { LibraryComponent } from './library';
     NgbModule,
     MatSlideToggleModule,
     BrowserAnimationsModule,
-    NgMaterialModule
+    NgMaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
