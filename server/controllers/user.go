@@ -37,7 +37,7 @@ func VerifyPassword(userPassword string, providedPassword string) (bool, string)
 	msg := ""
 
 	if err != nil {
-		msg = fmt.Sprintf("Password Is Incorrect")
+		msg = fmt.Sprintf("Password Incorrect")
 		check = false
 	}
 	return check, msg
@@ -50,25 +50,25 @@ func SignUp() gin.HandlerFunc {
 
 		defer cancel()
 		if err := c.BindJSON(&user); err != nil {
-			c.JSON(http.StatusBadRequest, responses.Response{Status: http.StatusBadRequest, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+			c.JSON(http.StatusBadRequest, responses.Response{Status: http.StatusBadRequest, Message: "Binding Error", Data: nil})
 			return
 		}
 
 		if validationErr := validate.Struct(&user); validationErr != nil {
-			c.JSON(http.StatusBadRequest, responses.Response{Status: http.StatusBadRequest, Message: "error", Data: map[string]interface{}{"data": validationErr.Error()}})
+			c.JSON(http.StatusBadRequest, responses.Response{Status: http.StatusBadRequest, Message: "Validation Error", Data: nil})
 			return
 		}
 
 		count, err := userCollection.CountDocuments(ctx, bson.M{"email": user.Email})
 		defer cancel()
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "Error", Data: nil})
 			return
 		}
 
 		if count > 0 {
 			msg := "Email Already Taken"
-			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: msg, Data: map[string]interface{}{"data": msg}})
+			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: msg, Data: nil})
 			return
 		}
 
@@ -81,18 +81,18 @@ func SignUp() gin.HandlerFunc {
 			Password: password,
 		}
 
-		newUser.Created_at, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
-		newUser.Updated_at, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
+		newUser.CreatedAt, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
+		newUser.UpdatedAt, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
 
 		_, err = userCollection.InsertOne(ctx, newUser)
 		defer cancel()
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "Database Error", Data: nil})
 			return
 		}
 
 		accessToken, refreshToken, _ := helpers.GenerateAllTokens(newUser)
-		c.JSON(http.StatusCreated, responses.Response{Status: http.StatusCreated, Message: "success", Data: map[string]interface{}{"accessToken": accessToken, "refreshToken": refreshToken}})
+		c.JSON(http.StatusCreated, responses.Response{Status: http.StatusCreated, Message: "Success", Data: map[string]interface{}{"accessToken": accessToken, "refreshToken": refreshToken}})
 	}
 }
 
@@ -104,27 +104,27 @@ func Login() gin.HandlerFunc {
 
 		defer cancel()
 		if err := c.BindJSON(&user); err != nil {
-			c.JSON(http.StatusBadRequest, responses.Response{Status: http.StatusBadRequest, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+			c.JSON(http.StatusBadRequest, responses.Response{Status: http.StatusBadRequest, Message: "Binding Error", Data: nil})
 			return
 		}
 
 		err := userCollection.FindOne(ctx, bson.M{"email": user.Email}).Decode(&foundUser)
 		defer cancel()
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "No User Matched With Email", Data: map[string]interface{}{"data": err.Error()}})
+			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "No Matched User", Data: nil})
 			return
 		}
 
 		valid, msg := VerifyPassword(user.Password, foundUser.Password)
 
 		if valid == false {
-			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: msg, Data: map[string]interface{}{"data": msg}})
+			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: msg, Data: nil})
 			return
 		}
 
 		accessToken, refreshToken, _ := helpers.GenerateAllTokens(foundUser)
 
-		c.JSON(http.StatusOK, responses.Response{Status: http.StatusOK, Message: "success", Data: map[string]interface{}{"accessToken": accessToken, "refreshToken": refreshToken}})
+		c.JSON(http.StatusOK, responses.Response{Status: http.StatusOK, Message: "Success", Data: map[string]interface{}{"accessToken": accessToken, "refreshToken": refreshToken}})
 	}
 }
 
@@ -135,13 +135,13 @@ func GetUser() gin.HandlerFunc {
 		var user models.User
 
 		id, _ := c.Get("id")
-		err := userCollection.FindOne(ctx, bson.M{"id": id}).Decode(&user)
+		err := userCollection.FindOne(ctx, bson.M{"_id": id}).Decode(&user)
 
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "No Matched User", Data: nil})
 			return
 		}
 
-		c.JSON(http.StatusOK, responses.Response{Status: http.StatusOK, Message: "success", Data: map[string]interface{}{"data": user}})
+		c.JSON(http.StatusOK, responses.Response{Status: http.StatusOK, Message: "Success", Data: map[string]interface{}{"user": user}})
 	}
 }
