@@ -8,10 +8,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [],
   imports: [
+    MatStepperModule,
     CommonModule,
     MatFormFieldModule,
     MatInputModule,
@@ -23,6 +25,7 @@ import { MatCardModule } from '@angular/material/card';
     MatCardModule
   ],
   exports: [
+    MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
