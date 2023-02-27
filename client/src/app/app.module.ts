@@ -16,6 +16,7 @@ import { RegisterComponent } from './register';
 import { CreateCardComponent } from './create-card';
 import { BrowseComponent } from './browse';
 import { LibraryComponent } from './library';
+import { StepperComponent } from './stepper/stepper.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { LibraryComponent } from './library';
     RegisterComponent,
     CreateCardComponent,
     BrowseComponent,
-    LibraryComponent
+    LibraryComponent,
+    StepperComponent
   ],
   imports: [
     BrowserModule,
