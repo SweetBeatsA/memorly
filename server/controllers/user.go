@@ -3,7 +3,6 @@ package controllers
 import (
 	"context"
 	"fmt"
-	"log"
 	"memorly/configs"
 	"memorly/forms"
 	"memorly/helpers"
@@ -23,12 +22,10 @@ import (
 var userCollection *mongo.Collection = configs.GetCollection(configs.DB, "users")
 var validate = validator.New()
 
-func HashPassword(password string) string {
+func HashPassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 11)
-	if err != nil {
-		log.Panic(err)
-	}
-	return string(bytes)
+
+	return string(bytes), err
 }
 
 func VerifyPassword(userPassword string, providedPassword string) (bool, string) {
@@ -67,12 +64,16 @@ func SignUp() gin.HandlerFunc {
 		}
 
 		if count > 0 {
-			msg := "Email Already Taken"
-			c.JSON(http.StatusBadRequest, responses.Response{Status: http.StatusBadRequest, Message: msg, Data: nil})
+			c.JSON(http.StatusBadRequest, responses.Response{Status: http.StatusBadRequest, Message: "Email Already Taken", Data: nil})
 			return
 		}
 
-		password := HashPassword(user.Password)
+		password, err := HashPassword(user.Password)
+
+		if err != nil {
+			c.JSON(http.StatusBadRequest, responses.Response{Status: http.StatusBadRequest, Message: "Input Password Is Too Long", Data: nil})
+			return
+		}
 
 		newUser := models.User{
 			Id:       primitive.NewObjectID(),
