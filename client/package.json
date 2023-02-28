@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "-": "^0.0.1",
     "@angular/animations": "^15.1.0",
     "@angular/cdk": "^15.1.3",
     "@angular/common": "^15.1.0",
@@ -24,6 +25,8 @@
     "axios": "^1.3.4",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
+    "g": "^2.0.1",
+    "ngentest": "^1.4.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
