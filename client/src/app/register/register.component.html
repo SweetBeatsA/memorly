@@ -14,20 +14,20 @@
     <!--<h2>Login form</h2>-->
     <mat-form-field appearance="fill">
         <mat-label>Username</mat-label>
-        <input matInput type="username" name="username">
+        <input matInput type="username" name="username" #username>
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
-        <input matInput type="email" name="email">
+        <input matInput type="email" name="email" #email>
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
-        <input matInput [type]="showPassword ? 'text' : 'password'" name="password">
+        <input matInput [type]="showPassword ? 'text' : 'password'" name="password" #password>
         <mat-icon matSuffix (click)="togglePasswordVisibility()">
             {{showPassword?'visibility_off':'visibility'}}
         </mat-icon>
     </mat-form-field>
-    <button mat-raised-button type="button" color="primary" (click)="signUp()">Sign Up</button>
+    <button mat-raised-button type="button" color="primary" (click)="signUp(email.value, password.value, username.value)">Sign Up</button>
     <!--<button mat-raised-button type="submit" color="primary">Create Account</button>-->
 </form>
 </mat-card>

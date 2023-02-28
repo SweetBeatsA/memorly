@@ -18,11 +18,15 @@ export class RegisterComponent {
         this.showPassword = !this.showPassword;
       }
 
-      public signUp(): void {
+      
+
+
+
+      public signUp(email1 : string,  password1 : string, name1 : string,): void {
         const data = {
-          email: 'tester@gmail.com',
-          password: 'testerPassword',
-          name: 'tester'
+          email: email1,
+          password: password1,
+          name: name1
         };
     
         axios.post('http://api.memorly.kro.kr/users/signup', data)
