@@ -89,8 +89,12 @@ export class LoginComponent {
 
   constructor(private authService: AuthService) {}
 
-  login() {
-    this.authService.login(this.email, this.password)
+  login(email1 : string,  password1 : string) {
+
+    const email = email1;
+    const password = password1;
+
+    this.authService.login(email, password)
       .then(() => {
         // Navigate to the home page or other protected routes
       });

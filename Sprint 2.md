@@ -25,6 +25,7 @@ http://api.memorly.kro.kr/
 # **List unit tests and Cypress tests for frontend**
 Cypress:
 - A test that goes to the home page and clicks to go to the login page
+
 Unit tests:
 - A test that checks that "Welcome to our CEN3031 Project!" is being displayed on the home page
 - A test that checks the Memorly icon is being displayed in the header
