@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import axios from 'axios';
 
 @Component({ templateUrl: 'register.component.html',
@@ -18,8 +19,9 @@ export class RegisterComponent {
     public isEmailValid: boolean = true;
 
     public showPassword: boolean = false;
+    
 
-    constructor() {}
+    constructor(private snackBar: MatSnackBar) {}
 
     public togglePasswordVisibility(): void {
         this.showPassword = !this.showPassword;
@@ -76,6 +78,7 @@ export class RegisterComponent {
           })
           .catch((error) => {
             console.error(error);
+            let snackBarRef = this.snackBar.open('Error on sign up.  Please try again', 'x');
           });
       }
 /*
