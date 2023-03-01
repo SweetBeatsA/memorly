@@ -61,5 +61,27 @@ api.memorly.kro.kr/users/signup
 | 400  | Email Already Taken | When the input email is already taken   |
 | 500  | Database Error      | When the database does not response     |
 
+## **Description**
+
+**Log In User**
+
+Log In an registered user with given email, password.
+
+**Expected Side Effect**
+
+This api is working with registered user. If the user does not sign up our service, they need to sign up first to call this api.
+
+## **Path**
+
+api.memorly.kro.kr/users/login
+
+## **Error**
+
+| Code | Message            | Case                                             |
+| ---- | ------------------ | ------------------------------------------------ |
+| 400  | Binding Error      | When the required input does not filled          |
+| 404  | No Matched User    | When the input email does not exist              |
+| 401  | Incorrect Password | When the input password does not match with user |
+
 Our API Documentation:
 https://documenter.getpostman.com/view/12809852/2s93CRJqgL
