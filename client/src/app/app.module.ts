@@ -10,6 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 //Different web pages
 import { HomeComponent } from './home';
@@ -37,9 +39,10 @@ import { LibraryComponent } from './library';
     MatSlideToggleModule,
     BrowserAnimationsModule,
     NgMaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

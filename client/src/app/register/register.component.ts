@@ -1,3 +1,46 @@
+/*
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../_services/auth.service';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
+})
+export class RegisterComponent implements OnInit {
+  form: any = {
+    username: null,
+    email: null,
+    password: null
+  };
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
+
+  constructor(private authService: AuthService) { }
+
+  ngOnInit(): void {
+  }
+
+  onSubmit(): void {
+    const { username, email, password } = this.form;
+
+    this.authService.register(username, email, password).subscribe(
+      data => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    );
+  }
+}
+*/
+
+
 import { Component } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
@@ -67,7 +110,7 @@ export class RegisterComponent {
 
 
 
-      public signUp(email1 : string,  password1 : string, name1 : string,): void {
+      public signUp(email1 : string,  password1 : string, name1 : string): void {
         const data = {
           email: email1,
           password: password1,
@@ -101,6 +144,11 @@ export class RegisterComponent {
             }
           });
       }
+
+      
+
+}
+
 /*
       axios.post('api.memorly.kro.kr/users/signup', {
         email: 'tester@gmail.com',
@@ -118,4 +166,3 @@ export class RegisterComponent {
         console.error(error);
       });
       */
-}
