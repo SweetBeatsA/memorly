@@ -7,7 +7,7 @@ http://api.memorly.kro.kr/
 # **Issues our team plans to address for Sprint 2**
 
 - Link backend and frontend
-- Allow the user to create an account and log in from the website, 
+- Allow the user to create an account and log in from the website front end
 - Create front end for a home page, as well as pages that can be accessed by clicking on different tabs on the header, such as login, card creation and card viewing/studying pages. 
 - Probably in the next sprint, add card library page with folders, but maybe start to do some of the front end for this.
 
