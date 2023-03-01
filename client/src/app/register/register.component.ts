@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 import axios from 'axios';
 
 @Component({ templateUrl: 'register.component.html',
@@ -17,11 +18,12 @@ export class RegisterComponent {
     email: string = '';
     public isUsernameValid: boolean = true;
     public isEmailValid: boolean = true;
-
     public showPassword: boolean = false;
     
 
-    constructor(private snackBar: MatSnackBar) {}
+    constructor(
+      private snackBar: MatSnackBar,
+      private router: Router,) {}
 
     public togglePasswordVisibility(): void {
         this.showPassword = !this.showPassword;
@@ -74,11 +76,29 @@ export class RegisterComponent {
     
         axios.post('http://api.memorly.kro.kr/users/signup', data)
           .then((response) => {
-              console.log(response);
+            console.log(response);
+            console.log(response.data.data.accessToken);
+            console.log(response.data.data.refreshToken);
+
+            // need to track jwt
+            sessionStorage.setItem('accessToken', response.data.data.accessToken);
+            sessionStorage.setItem('refreshToken', response.data.data.refreshToken);
+
+            this.router.navigateByUrl('dashboard');
+
           })
           .catch((error) => {
             console.error(error);
-            let snackBarRef = this.snackBar.open('Error on sign up.  Please try again', 'x');
+
+            if(error.response.status >= 500){
+              let snackBarRef = this.snackBar.open('This one\'s on us... try again later', 'x');
+            }
+            else if(error.response.status === 400){
+              let snackBarRef = this.snackBar.open('Email has already been taken', 'x');
+            }
+            else if(error.response.message === 'Binding Error'){
+              let snackBarRef = this.snackBar.open('Please fill out each form', 'x');
+            }
           });
       }
 /*
