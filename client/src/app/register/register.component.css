@@ -30,3 +30,11 @@ mat-card-content {
     height: 100px;
     
   }
+  
+
+.text-red-500-text-xs-italic { 
+  color: #f56565; 
+  font-size: small;
+  font-style: italic;
+}
+
