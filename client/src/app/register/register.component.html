@@ -119,7 +119,7 @@ Some code for password requirements, authentication, etc found at https://www.be
         <mat-label>Email</mat-label>
         <input matInput type="email" name="email" id='email' (keyup)="onKey($event, 'email')" #email>
     </mat-form-field>
-    <p *ngIf="!isEmailValid" class="text-red-500 text-xs italic">Invalid Email address!</p>
+    <p *ngIf="!isEmailValid" class="text-red-500-text-xs-italic">Invalid Email address!</p>
     <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
         <input matInput [type]="showPassword ? 'text' : 'password'" name="password" id='password' (keyup)="onKey($event, 'password')" #password>
@@ -127,7 +127,7 @@ Some code for password requirements, authentication, etc found at https://www.be
             {{showPassword?'visibility_off':'visibility'}}
         </mat-icon>
     </mat-form-field>
-    <p *ngIf="!isPasswordValid" class="text-red-500 text-xs italic">Password must be at least 8 characters!</p>
+    <p *ngIf="!isPasswordValid" class="text-red-500-text-xs-italic">Password must be at least 8 characters!</p>
     <button mat-raised-button type="button" color="primary" (click)="signUp(email.value, password.value, username.value)">Sign Up</button>
     
     
