@@ -83,5 +83,29 @@ api.memorly.kro.kr/users/login
 | 404  | No Matched User    | When the input email does not exist              |
 | 401  | Incorrect Password | When the input password does not match with user |
 
+## **Description**
+
+**Get User**
+
+Getting an specific user information with given token which is set from the HTTP header as a key name "Authorization".
+
+**Expected Side Effect**
+
+This api is to check whether our JWT token is working well or not along with checking the information of User.  
+Therefore, the accessToken value from either signUp or logIn api should be set to a HTTP Header. Failure to set the token or using an expired token will throw an error.
+
+## **Path**
+
+api.memorly.kro.kr/users/login
+
+## **Error**
+
+| Code | Message                         | Case                                  |
+| ---- | ------------------------------- | ------------------------------------- |
+| 400  | No Authorization Token Provided | When the token is not provided        |
+| 401  | Invalid Token                   | When the given token value is invalid |
+| 401  | Expired Token                   | When the given token is expired       |
+| 404  | No Matched User                 | When the user email does not exist    |
+
 Our API Documentation:
 https://documenter.getpostman.com/view/12809852/2s93CRJqgL
