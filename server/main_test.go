@@ -11,18 +11,18 @@ import (
 func SetUpRouter() *gin.Engine{
     router := gin.Default()
 
-	router.GET("/login", func(c *gin.Context){
+	router.GET("/getuser", func(c *gin.Context){
 		c.String(http.StatusOK, "successful")
 	})
 
     return router
 };
 
-func TestLogIn(t *testing.T){
+func TestGetUser(t *testing.T){
 	router := setupRouter()
 
 	//request to /login
-	request, err := http.NewRequest("GET", "/login", nil)
+	request, err := http.NewRequest("GET", "/getuser", nil)
 	assert.NoError(t, err)
 
 	//record response
