@@ -103,7 +103,7 @@
             {{showPassword?'visibility_off':'visibility'}}
         </mat-icon>
     </mat-form-field>
-    <button mat-raised-button type="submit" color="primary" (click)="login()">Login</button>
+    <button mat-raised-button type="submit" color="primary" (click)="login(email.value, password.value)">Login</button>
     
 </form>
 </mat-card>

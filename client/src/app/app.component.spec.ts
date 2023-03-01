@@ -28,7 +28,7 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('CEN3031Project');
   });
 
-  it('should display the Memorly logo on the main page', () => {
+  it('should display the Memorly logo on the header', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     const imageElement = fixture.debugElement.nativeElement.querySelector('img');
