@@ -38,5 +38,28 @@ Unit tests:
 
 
 # **Detailed documentation of your backend API**
+
+## **Description**
+
+**Sign Up User**
+
+Registering an user with given email, password, and name.
+
+**Expected Side Effect**
+
+If the email is already in use, user need to use different email.
+
+## **Path**
+
+api.memorly.kro.kr/users/signup
+
+## **Error**
+
+| Code | Message             | Case                                    |
+| ---- | ------------------- | --------------------------------------- |
+| 400  | Binding Error       | When the required input does not filled |
+| 400  | Email Already Taken | When the input email is already taken   |
+| 500  | Database Error      | When the database does not response     |
+
 Our API Documentation:
 https://documenter.getpostman.com/view/12809852/2s93CRJqgL
