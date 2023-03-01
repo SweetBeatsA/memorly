@@ -39,9 +39,7 @@ Unit tests:
 
 # **Detailed documentation of your backend API**
 
-## **Description**
-
-**Sign Up User**
+## **Sign Up User**
 
 Registering an user with given email, password, and name.
 
@@ -49,11 +47,11 @@ Registering an user with given email, password, and name.
 
 If the email is already in use, user need to use different email.
 
-## **Path**
+### **Path**
 
 api.memorly.kro.kr/users/signup
 
-## **Error**
+### **Error**
 
 | Code | Message             | Case                                    |
 | ---- | ------------------- | --------------------------------------- |
@@ -61,9 +59,7 @@ api.memorly.kro.kr/users/signup
 | 400  | Email Already Taken | When the input email is already taken   |
 | 500  | Database Error      | When the database does not response     |
 
-## **Description**
-
-**Log In User**
+## **Log In User**
 
 Log In an registered user with given email, password.
 
@@ -71,11 +67,11 @@ Log In an registered user with given email, password.
 
 This api is working with registered user. If the user does not sign up our service, they need to sign up first to call this api.
 
-## **Path**
+### **Path**
 
 api.memorly.kro.kr/users/login
 
-## **Error**
+### **Error**
 
 | Code | Message            | Case                                             |
 | ---- | ------------------ | ------------------------------------------------ |
@@ -83,9 +79,7 @@ api.memorly.kro.kr/users/login
 | 404  | No Matched User    | When the input email does not exist              |
 | 401  | Incorrect Password | When the input password does not match with user |
 
-## **Description**
-
-**Get User**
+## **Get User**
 
 Getting an specific user information with given token which is set from the HTTP header as a key name "Authorization".
 
@@ -94,11 +88,11 @@ Getting an specific user information with given token which is set from the HTTP
 This api is to check whether our JWT token is working well or not along with checking the information of User.  
 Therefore, the accessToken value from either signUp or logIn api should be set to a HTTP Header. Failure to set the token or using an expired token will throw an error.
 
-## **Path**
+### **Path**
 
 api.memorly.kro.kr/users/login
 
-## **Error**
+### **Error**
 
 | Code | Message                         | Case                                  |
 | ---- | ------------------------------- | ------------------------------------- |
