@@ -127,6 +127,7 @@ Some code for password requirements, authentication, etc found at https://www.be
             {{showPassword?'visibility_off':'visibility'}}
         </mat-icon>
     </mat-form-field>
+    <p *ngIf="!isPasswordValid" class="text-red-500 text-xs italic">Password must be at least 8 characters!</p>
     <button mat-raised-button type="button" color="primary" (click)="signUp(email.value, password.value, username.value)">Sign Up</button>
     
     

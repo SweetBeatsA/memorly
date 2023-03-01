@@ -61,6 +61,7 @@ export class RegisterComponent {
     email: string = '';
     public isUsernameValid: boolean = true;
     public isEmailValid: boolean = true;
+    public isPasswordValid: boolean = true;
     public showPassword: boolean = false;
     
 
@@ -79,6 +80,7 @@ export class RegisterComponent {
         }
         else if (type === 'password'){
           this.password = event.target.value;
+          this.validatePassword();
         }
         else if(type === 'email'){
           this.email = event.target.value;
@@ -95,6 +97,14 @@ export class RegisterComponent {
         }
       }
 
+      validatePassword(): void{
+        if(this.password.length < 8){
+          this.isPasswordValid = false;
+        }
+        else{
+          this.isPasswordValid = true;
+        }
+      }
 
       /*validateEmail(): void{
         const pattern = RegExp(/^[\w-.]*$/);
@@ -116,6 +126,12 @@ export class RegisterComponent {
           password: password1,
           name: name1
         };
+        if (!this.isUsernameValid || !this.isEmailValid || !this.isPasswordValid){}
+        else if(this.email === "" || this.username === ""){
+          let snackBarRef = this.snackBar.open('Please fill out all forms before submitting!', 'x', {duration: 10000});
+        }
+       else{
+        
     
         axios.post('http://api.memorly.kro.kr/users/signup', data)
           .then((response) => {
@@ -134,15 +150,16 @@ export class RegisterComponent {
             console.error(error);
 
             if(error.response.status >= 500){
-              let snackBarRef = this.snackBar.open('This one\'s on us... try again later', 'x');
+              let snackBarRef = this.snackBar.open('This one\'s on us... try again later', 'x', {duration: 10000});
             }
             else if(error.response.status === 400){
-              let snackBarRef = this.snackBar.open('Email has already been taken', 'x');
+              let snackBarRef = this.snackBar.open('Email has already been taken', 'x', {duration: 10000});
             }
             else if(error.response.message === 'Binding Error'){
-              let snackBarRef = this.snackBar.open('Please fill out each form', 'x');
+              let snackBarRef = this.snackBar.open('Please fill out each form', 'x', {duration: 10000});
             }
           });
+        }
       }
 
       
