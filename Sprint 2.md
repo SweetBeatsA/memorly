@@ -13,9 +13,9 @@ http://api.memorly.kro.kr/
 
 # **Which issues were successfully completed**
 - The user can create an account from the front end sign up page
-- The user will be stopped from creating an account if an account with the given email already exists in the database, if the password is not 8 characters, if there are special characters in the username
+- The user will be stopped from creating an account if an account with the given email already exists in the database, if the password is not 8 characters, or if there are special characters in the username
 - The user can log in from the log in page
-- If the user enters the wrong email/password, it will display a message telling them
+- If the user enters the wrong email/password, it will display a message telling them so
 - There are multiple different webpages which can be accessed from the header, though many of them are just dummy pages for now and need work on the feature implementation and formatting
 - Deploy both Client and Server onto AWS
 - Completed the API to sign up, log in, and get a specific user data and linked it to the front end
