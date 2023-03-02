@@ -22,7 +22,7 @@ func TestSignUp(t *testing.T) {
 	router := setupRouter()
 	regex := regexp.MustCompile("-")
 
-	email := regex.ReplaceAllString(uuid.New().String(), "") + "@gmail.com"
+	email := regex.ReplaceAllString(uuid.New().String(), "") + "@test.com"
 	data := map[string]string{"email": email, "password": "testerPassword", "name": "test"}
 	body, _ := json.Marshal(data)
 
