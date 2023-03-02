@@ -1,48 +1,7 @@
-/*
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
-
-@Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
-})
-export class RegisterComponent implements OnInit {
-  form: any = {
-    username: null,
-    email: null,
-    password: null
-  };
-  isSuccessful = false;
-  isSignUpFailed = false;
-  errorMessage = '';
-
-  constructor(private authService: AuthService) { }
-
-  ngOnInit(): void {
-  }
-
-  onSubmit(): void {
-    const { username, email, password } = this.form;
-
-    this.authService.register(username, email, password).subscribe(
-      data => {
-        console.log(data);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
-  }
-}
-*/
-
 
 import { Component } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 import axios from 'axios';
 
 @Component({ templateUrl: 'register.component.html',
@@ -60,11 +19,13 @@ export class RegisterComponent {
     email: string = '';
     public isUsernameValid: boolean = true;
     public isEmailValid: boolean = true;
-
+    public isPasswordValid: boolean = true;
     public showPassword: boolean = false;
     
 
-    constructor(private snackBar: MatSnackBar) {}
+    constructor(
+      private snackBar: MatSnackBar,
+      private router: Router,) {}
 
     public togglePasswordVisibility(): void {
         this.showPassword = !this.showPassword;
@@ -77,6 +38,7 @@ export class RegisterComponent {
         }
         else if (type === 'password'){
           this.password = event.target.value;
+          this.validatePassword();
         }
         else if(type === 'email'){
           this.email = event.target.value;
@@ -93,6 +55,14 @@ export class RegisterComponent {
         }
       }
 
+      validatePassword(): void{
+        if(this.password.length < 8){
+          this.isPasswordValid = false;
+        }
+        else{
+          this.isPasswordValid = true;
+        }
+      }
 
       /*validateEmail(): void{
         const pattern = RegExp(/^[\w-.]*$/);
@@ -114,15 +84,40 @@ export class RegisterComponent {
           password: password1,
           name: name1
         };
+        if (!this.isUsernameValid || !this.isEmailValid || !this.isPasswordValid){}
+        else if(this.email === "" || this.username === ""){
+          let snackBarRef = this.snackBar.open('Please fill out all forms before submitting!', 'x', {duration: 10000});
+        }
+       else{
+        
     
         axios.post('http://api.memorly.kro.kr/users/signup', data)
           .then((response) => {
-              console.log(response);
+            console.log(response);
+            console.log(response.data.data.accessToken);
+            console.log(response.data.data.refreshToken);
+
+            // need to track jwt
+            sessionStorage.setItem('accessToken', response.data.data.accessToken);
+            sessionStorage.setItem('refreshToken', response.data.data.refreshToken);
+
+            this.router.navigateByUrl('dashboard');
+
           })
           .catch((error) => {
             console.error(error);
-            let snackBarRef = this.snackBar.open('Error on sign up.  Please try again', 'x');
+
+            if(error.response.status >= 500){
+              let snackBarRef = this.snackBar.open('This one\'s on us... try again later', 'x', {duration: 10000});
+            }
+            else if(error.response.status === 400){
+              let snackBarRef = this.snackBar.open('Email has already been taken', 'x', {duration: 10000});
+            }
+            else if(error.response.message === 'Binding Error'){
+              let snackBarRef = this.snackBar.open('Please fill out each form', 'x', {duration: 10000});
+            }
           });
+        }
       }
 
       

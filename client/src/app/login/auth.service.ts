@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  private readonly apiUrl = 'http://api.memorly.kro.kr/users/login/';
+  private readonly apiUrl = 'http://api.memorly.kro.kr/users/login';
 
   constructor(private http: HttpClient) {}
 
