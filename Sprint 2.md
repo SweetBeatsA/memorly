@@ -17,11 +17,15 @@ http://api.memorly.kro.kr/
 - The user can log in from the log in page
 - If the user enters the wrong email/password, it will display a message telling them
 - There are multiple different webpages which can be accessed from the header, though many of them are just dummy pages for now and need work on the feature implementation and formatting
+- Completed the API to sign up, log in, and get a specific users data and linked it to the front end
+- Connected a database to keep track of the user data
 
 # **Which issues were not completed and why** 
 - Home page needs to change if the user is logged in so that it does not prompt them to log in still
 - There is a lot of messy and commented front end code currently which needs to be cleaned up
 - It is still not possible to create or view flash cards yet
+- Fix up the backend code
+- Keep track of data sets created by users
 
 
 
@@ -35,8 +39,10 @@ Unit tests:
 
 
 # **List unit tests for backend**
-
-
+Unit tests:
+- A test that checks that a user profile was successfully created with the Sign Up API
+- A test that checks if a user log in to the profile that was created with the Log In API
+- A test that returns the user profile that were created previously using the authorization token with the Get User API
 
 # **Detailed documentation of your backend API**
 
