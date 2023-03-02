@@ -101,6 +101,8 @@ export class RegisterComponent {
             sessionStorage.setItem('accessToken', response.data.data.accessToken);
             sessionStorage.setItem('refreshToken', response.data.data.refreshToken);
 
+            let snackBarRef = this.snackBar.open('Account creation successful', 'x', {duration: 10000});
+
             this.router.navigateByUrl('dashboard');
 
           })
