@@ -26,6 +26,7 @@ http://api.memorly.kro.kr/
 - It is still not possible to create or view flash cards yet
 - Fix up the backend code
 - Keep track of data sets created by users
+- Backend test cases that check for errors
 
 
 
