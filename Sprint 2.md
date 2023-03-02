@@ -17,17 +17,15 @@ http://api.memorly.kro.kr/
 - The user can log in from the log in page
 - If the user enters the wrong email/password, it will display a message telling them
 - There are multiple different webpages which can be accessed from the header, though many of them are just dummy pages for now and need work on the feature implementation and formatting
-- Completed the API to sign up, log in, and get a specific users data and linked it to the front end
+- Deploy both Client and Server onto AWS
+- Completed the API to sign up, log in, and get a specific user data and linked it to the front end
 - Connected a database to keep track of the user data
 
 # **Which issues were not completed and why** 
 - Home page needs to change if the user is logged in so that it does not prompt them to log in still
 - There is a lot of messy and commented front end code currently which needs to be cleaned up
 - It is still not possible to create or view flash cards yet
-- Fix up the backend code
-- Keep track of data sets created by users
 - Backend test cases that check for errors
-
 
 
 # **List unit tests and Cypress tests for frontend**
