@@ -14,11 +14,12 @@ http://api.memorly.kro.kr/
 # **Which issues were successfully completed**
 - The user can create an account from the front end sign up page
 - The user will be stopped from creating an account if an account with the given email already exists in the database, if the password is not 8 characters, if there are special characters in the username
-- The user can log in from the log in page, currently this does not do anything visually however
+- The user can log in from the log in page
+- If the user enters the wrong email/password, it will display a message telling them
 - There are multiple different webpages which can be accessed from the header, though many of them are just dummy pages for now and need work on the feature implementation and formatting
 
 # **Which issues were not completed and why** 
-- User login does not show anything yet on the front end side whether login was successful or not
+- Home page needs to change if the user is logged in so that it does not prompt them to log in still
 - There is a lot of messy and commented front end code currently which needs to be cleaned up
 - It is still not possible to create or view flash cards yet
 
