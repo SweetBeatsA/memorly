@@ -101,6 +101,8 @@ export class RegisterComponent {
             sessionStorage.setItem('accessToken', response.data.data.accessToken);
             sessionStorage.setItem('refreshToken', response.data.data.refreshToken);
 
+            let snackBarRef = this.snackBar.open('Account creation successful', 'x', {duration: 10000});
+
             this.router.navigateByUrl('dashboard');
 
           })
@@ -113,9 +115,9 @@ export class RegisterComponent {
             else if(error.response.status === 400){
               let snackBarRef = this.snackBar.open('Email has already been taken', 'x', {duration: 10000});
             }
-            else if(error.response.message === 'Binding Error'){
-              let snackBarRef = this.snackBar.open('Please fill out each form', 'x', {duration: 10000});
-            }
+            //else if(error.response.message === 'Binding Error'){
+            //  let snackBarRef = this.snackBar.open('Please fill out each form', 'x', {duration: 10000});
+            //}
           });
         }
       }
