@@ -69,3 +69,43 @@ func TestLogIn(t *testing.T) {
 	assert.Equal(t, 200, resp.Status)
 	assert.NotNil(t, resp.Data)
 }
+
+func TestGetUser(t *testing.T) {
+	type Response struct {
+		Status  int                    `json:"status"`
+		Message string                 `json:"message"`
+		Data    map[string]interface{} `json:"data"`
+	}
+
+	router := setupRouter()
+
+	data := map[string]string{"email": "tester@gmail.com", "password": "testerPassword"}
+	body, _ := json.Marshal(data)
+
+	request, err := http.NewRequest("POST", "/users/login", bytes.NewBuffer(body))
+	assert.NoError(t, err)
+
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, request)
+
+	var resp Response
+	err = json.Unmarshal(w.Body.Bytes(), &resp)
+
+	token := resp.Data["accessToken"].(string)
+
+	request, err = http.NewRequest("GET", "/user", nil)
+	assert.NoError(t, err)
+
+	request.Header.Set("Authorization", token)
+
+	w = httptest.NewRecorder()
+	router.ServeHTTP(w, request)
+
+	err = json.Unmarshal(w.Body.Bytes(), &resp)
+
+	assert.NoError(t, err)
+	assert.Equal(t, http.StatusOK, w.Code)
+	assert.Equal(t, "Success", resp.Message)
+	assert.Equal(t, 200, resp.Status)
+	assert.NotNil(t, resp.Data)
+}
