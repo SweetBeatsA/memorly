@@ -113,9 +113,9 @@ export class RegisterComponent {
             else if(error.response.status === 400){
               let snackBarRef = this.snackBar.open('Email has already been taken', 'x', {duration: 10000});
             }
-            else if(error.response.message === 'Binding Error'){
-              let snackBarRef = this.snackBar.open('Please fill out each form', 'x', {duration: 10000});
-            }
+            //else if(error.response.message === 'Binding Error'){
+            //  let snackBarRef = this.snackBar.open('Please fill out each form', 'x', {duration: 10000});
+            //}
           });
         }
       }
