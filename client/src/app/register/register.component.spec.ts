@@ -2,6 +2,8 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { NgMaterialModule } from '../ng-material/ng-material.module';
 //import axios from 'axios';
 import { RegisterComponent } from './register.component';
 
@@ -22,6 +24,8 @@ describe('RgisterComponent', () => {
             Component,
             MatSnackBar,
             Router,
+            NgModule,
+            NgMaterialModule
             //axios
           ]
         }).compileComponents();
