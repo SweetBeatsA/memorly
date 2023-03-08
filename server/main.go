@@ -17,6 +17,7 @@ func setupRouter() *gin.Engine {
 
 	routes.AuthRoute(router)
 	routes.UserRoute(router)
+	routes.FolderRoute(router)
 
 	return router
 }
