@@ -44,6 +44,7 @@ export class LoginComponent {
     };
     //const email = email1;
     //const password = password1;
+    
 
     //this.authService.login(email, password)
     axios.post('http://api.memorly.kro.kr/users/login', data)
@@ -58,7 +59,7 @@ export class LoginComponent {
             sessionStorage.setItem('refreshToken', response.data.data.refreshToken);
 
             let snackBarRef = this.snackBar.open('Login successful', 'x', {duration: 10000});
-            this.router.navigateByUrl('dashboard');
+            this.router.navigateByUrl('library');
             
       })
       .catch((error) => {
@@ -77,6 +78,8 @@ export class LoginComponent {
           let snackBarRef = this.snackBar.open('Please fill out each form', 'x', {duration: 10000});
         };
       });
+
+
   }
 }
 
