@@ -6,10 +6,12 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type Folder struct {
+type Card struct {
 	Id        primitive.ObjectID `json:"id" bson:"_id,omitempty"`
 	CreatorId primitive.ObjectID `json:"creatorId" bson:"creatorId,omitempty"`
-	Title     string             `json:"title" bson:"title,omitempty"`
+	FolderId  primitive.ObjectID `json:"folderId" bson:"folderId,omitempty"`
+	Question  string             `json:"question" bson:"question,omitempty"`
+	Answer    string             `json:"answer" bson:"answer,omitempty"`
 	CreatedAt time.Time          `json:"createdAt" bson:"createdAt,omitempty"`
 	UpdatedAt time.Time          `json:"updatedAt" bson:"updatedAt,omitempty"`
 }

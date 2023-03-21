@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func FolderRoute(router *gin.Engine) {
+func CardRoute(router *gin.Engine) {
 	router.Use(middleware.Authenticate())
-	router.POST("/folder", controllers.CreateFolder())
+	router.POST("/card", controllers.CreateCard())
 }
