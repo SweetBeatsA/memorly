@@ -8,6 +8,8 @@ import { CreateCardComponent } from './create-card';
 import { BrowseComponent } from './browse';
 import { LibraryComponent } from './library';
 
+import { CreateFolderComponent } from './create-folder';
+import { CardViewComponent } from './card-view';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +18,8 @@ const routes: Routes = [
     { path: 'create-card', component: CreateCardComponent },
     { path: 'browse', component: BrowseComponent },
     { path: 'library', component: LibraryComponent },
+    { path: 'card-view', component: CardViewComponent },
+    { path: 'create-folder', component: CreateFolderComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

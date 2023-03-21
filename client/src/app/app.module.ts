@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
+import { MatGridListModule } from '@angular/material/grid-list';
+
 //Different web pages
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
@@ -20,6 +22,8 @@ import { RegisterComponent } from './register';
 import { CreateCardComponent } from './create-card';
 import { BrowseComponent } from './browse';
 import { LibraryComponent } from './library';
+import { CardViewComponent } from './card-view';
+import { CreateFolderComponent } from './create-folder';
 
 
 @NgModule({
@@ -31,6 +35,8 @@ import { LibraryComponent } from './library';
     CreateCardComponent,
     BrowseComponent,
     LibraryComponent,
+    CardViewComponent,
+    CreateFolderComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +46,8 @@ import { LibraryComponent } from './library';
     BrowserAnimationsModule,
     NgMaterialModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatGridListModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

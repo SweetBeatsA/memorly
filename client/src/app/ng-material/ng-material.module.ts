@@ -26,7 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatNativeDateModule,
     MatCardModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   exports: [
     MatStepperModule,
