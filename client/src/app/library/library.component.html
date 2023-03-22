@@ -1,10 +1,26 @@
 
 <div class="p-2 text-center bg-light" style="margin-top: 58px;">
+
     <h2 class="mb-3">Card Library</h2>
     
-</div>
+    <a mat-raised-button href="/create-folder" style="text-align: center">Add new folder</a> 
+  </div>
 
 
+
+
+
+<mat-grid-list cols="4" rowHeight="300px">
+  <mat-card *ngFor="let folder of folders" [routerLink]="['http://api.memorly.kro.kr/library', folder.id]" [style.width]="'25%'">
+    <mat-icon>{{ folder.icon }}</mat-icon>
+    <mat-card-content>
+      <h3>{{ folder.name }}</h3>
+    </mat-card-content>
+  </mat-card>
+</mat-grid-list>
+
+
+<!--
 <section>
 
     
@@ -16,19 +32,19 @@
             <div class="d-grid gap-2">
           <mat-card-title>
             <br>
-            Create new flashcard
+            Create new flashcard folder
           </mat-card-title>
             
           
           <mat-card-content> 
             <br>
             <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Input front text</mat-label>
+              <mat-label>Title</mat-label>
               <input matInput placeholder="Enter text">
             </mat-form-field>
             
             <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Input back text</mat-label>
+              <mat-label>Description</mat-label>
               <input matInput placeholder="Enter text">
             </mat-form-field>
           </mat-card-content>
@@ -38,110 +54,7 @@
           <mat-card-actions > 
       
             <div class ="align-center">
-              <button mat-raised-button>Add card</button>
-      
-            </div>
-          </mat-card-actions>
-        </div>
-        </mat-card>
-
-        
-        <mat-card [style.width.px]=500 [style.height.px]=250>
-            <td style="text-align: center">
-            <div class="d-grid gap-2">
-          <mat-card-title>
-            <br>
-            Create new flashcard
-          </mat-card-title>
-            
-          
-          <mat-card-content> 
-            <br>
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Input front text</mat-label>
-              <input matInput placeholder="Enter text">
-            </mat-form-field>
-            
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Input back text</mat-label>
-              <input matInput placeholder="Enter text">
-            </mat-form-field>
-          </mat-card-content>
-          
-      
-          
-          <mat-card-actions > 
-      
-            <div class ="align-center">
-              <button mat-raised-button>Add card</button>
-      
-            </div>
-          </mat-card-actions>
-        </div>
-        </mat-card>
-
-        <mat-card [style.width.px]=500 [style.height.px]=250>
-            <td style="text-align: center">
-            <div class="d-grid gap-2">
-          <mat-card-title>
-            <br>
-            Create new flashcard
-          </mat-card-title>
-            
-          
-          <mat-card-content> 
-            <br>
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Input front text</mat-label>
-              <input matInput placeholder="Enter text">
-            </mat-form-field>
-            
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Input back text</mat-label>
-              <input matInput placeholder="Enter text">
-            </mat-form-field>
-          </mat-card-content>
-          
-      
-          
-          <mat-card-actions > 
-      
-            <div class ="align-center">
-              <button mat-raised-button>Add card</button>
-      
-            </div>
-          </mat-card-actions>
-        </div>
-        </mat-card>
-
-        <mat-card [style.width.px]=500 [style.height.px]=250>
-            <td style="text-align: center">
-            <div class="d-grid gap-2">
-          <mat-card-title>
-            <br>
-            Create new flashcard
-          </mat-card-title>
-            
-          
-          <mat-card-content> 
-            <br>
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Input front text</mat-label>
-              <input matInput placeholder="Enter text">
-            </mat-form-field>
-            
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Input back text</mat-label>
-              <input matInput placeholder="Enter text">
-            </mat-form-field>
-          </mat-card-content>
-          
-      
-          
-          <mat-card-actions > 
-      
-            <div class ="align-center">
-              <button mat-raised-button>Add card</button>
+              <button mat-raised-button>Create folder</button>
       
             </div>
           </mat-card-actions>
@@ -158,7 +71,7 @@
   </section>
 
 
-
+-->
 <!--
 <section>
   

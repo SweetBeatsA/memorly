@@ -103,7 +103,7 @@ export class RegisterComponent {
 
             let snackBarRef = this.snackBar.open('Account creation successful', 'x', {duration: 10000});
 
-            this.router.navigateByUrl('dashboard');
+            this.router.navigateByUrl('library');
 
           })
           .catch((error) => {
