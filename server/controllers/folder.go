@@ -4,7 +4,9 @@ import (
 	"context"
 	// "fmt"
 	// "memorly/configs"
+	"memorly/configs"
 	"memorly/forms"
+
 	//"memorly/helpers"
 	"memorly/models"
 	"memorly/responses"
@@ -15,9 +17,12 @@ import (
 	//"github.com/go-playground/validator/v10"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 	// "go.mongodb.org/mongo-driver/mongo"
 	// "golang.org/x/crypto/bcrypt"
 )
+
+var folderCollection *mongo.Collection = configs.GetCollection(configs.DB, "folders")
 
 func CreateFolder() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -49,11 +54,11 @@ func CreateFolder() gin.HandlerFunc {
 		}
 
 		newFolder := models.Folder{
-			Id:        primitive.NewObjectID(),
+			Id: primitive.NewObjectID(),
 			// CreatorId: primitive.ObjectID(),
 			//^ the above isnt working not sure how get the jwt token the ID and Creator ID since they already exist
 			//Also I might be wrong but I assume the ID is a new ID for the folder thats created so I made a new object ID for it
-			Title:      folder.Title,
+			Title: folder.Title,
 			//Not sure if I need to include the created time and updated time
 		}
 
