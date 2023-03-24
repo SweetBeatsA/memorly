@@ -15,11 +15,10 @@ export class CreateFolderComponent {
   constructor(private router: Router) {}
 
 
-    createFolder(name1 : string,  description1 : string) {
+    createFolder(name1 : string) {
 
         const data = { 
-          name: name1, 
-          description: description1 };
+          name: name1};
 
         // Define the headers with the access token
         const headers = { Authorization: sessionStorage.getItem('accessToken') };

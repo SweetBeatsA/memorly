@@ -1,8 +1,74 @@
 
 
+<div class="p-2 text-center bg-light" style="margin-top: 58px;">
 
-<section>
+  <h2 class="mb-3">Enter card contents</h2>
+
+  <button mat-raised-button color="primary" (click)="addItem()">Add card</button>
+<button mat-raised-button color="primary" (click)="removeItem()">Remove card</button>
+</div>
+<mat-card>
+  <div class="center">
+<div *ngFor="let item of frontItems; let i = index">
+  <input matInput [(ngModel)]="frontItems[i]" placeholder="Front {{i+1}}">
+  <input matInput [(ngModel)]="backItems[i]" placeholder="Back {{i+1}}">
+
+</div>
+  <button mat-raised-button color="primary" (click)="sendData()">Create cards</button>
+</div>
+</mat-card>
+
+
+
+
+
+
+
+<!--
+<div class="p-2 text-center bg-light" style="margin-top: 58px;">
+
+  <h2 class="mb-3">Enter card contents</h2>
+</div>
+
+<mat-card>
+  <form class="login-form">
+      
   
+      
+      <mat-form-field appearance="fill">
+          <mat-label>Enter front of card</mat-label>
+          <input matInput type="front1" name="front1" #front1>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+          <mat-label>Enter back of card</mat-label>
+          <input matInput type="front1" name="back1" #back1>
+          
+      </mat-form-field>
+      
+      
+        
+    
+        
+      <mat-form-field appearance="fill">
+        <mat-label>Enter front of card</mat-label>
+        <input matInput type="front1" name="front1" #front1>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Enter back of card</mat-label>
+        <input matInput type="front1" name="back1" #back1>
+        
+    </mat-form-field>
+
+        
+
+        
+        
+    </form>
+    </mat-card>
+-->
+<!--
+<section>
+  <button mat-raised-button type="submit" color="primary" (click)="createCards(name.value, cards)">Create folder</button>
   
     
 
@@ -10,7 +76,6 @@
     <td style="text-align: center">
         <mat-card [style.width.px]=500 [style.height.px]=250>
         
-        <!--Bootstrap component for spacing between elements-->
         <div class="d-grid gap-2">
       <mat-card-title>
         <br>
@@ -46,3 +111,4 @@
   
   
   </section>
+-->
