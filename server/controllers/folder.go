@@ -75,3 +75,32 @@ func CreateFolder() gin.HandlerFunc {
 		c.JSON(http.StatusCreated, responses.Response{Status: http.StatusCreated, Message: "Success", Data: map[string]interface{}{"id": newFolder.Id}})
 	}
 }
+
+func GetFolders() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+		var folders []models.Folder
+
+		id, _ := c.Get("id")
+		cursor, err := folderCollection.Find(ctx, bson.M{"creatorId": id})
+
+		if err != nil {
+			c.JSON(http.StatusNotFound, responses.Response{Status: http.StatusNotFound, Message: "Failed to query folders", Data: nil})
+			return
+		}
+		defer cursor.Close(ctx)
+
+		for cursor.Next(ctx) {
+			var folder models.Folder
+			err := cursor.Decode(&folder)
+			if err != nil {
+				c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "Failed to decode folder", Data: nil})
+				return
+			}
+			folders = append(folders, folder)
+		}
+
+		c.JSON(http.StatusOK, responses.Response{Status: http.StatusOK, Message: "Success", Data: map[string]interface{}{"folders": folders}})
+	}
+}
