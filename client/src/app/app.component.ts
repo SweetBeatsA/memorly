@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'CEN3031Project';
+  public isLoggedIn: boolean = false;
+  public username: string = '';
+
+  public readBoolFromLocal(key: string): boolean{
+    return localStorage.getItem(key) === 'true';
+  }
+  ngOnInit(){
+    this.isLoggedIn = this.readBoolFromLocal('isLoggedIn');
+  }
 }

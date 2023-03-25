@@ -88,7 +88,7 @@ export class RegisterComponent {
         else if(this.email === "" || this.username === ""){
           let snackBarRef = this.snackBar.open('Please fill out all forms before submitting!', 'x', {duration: 10000});
         }
-       else{
+        else{
         
     
         axios.post('http://api.memorly.kro.kr/users/signup', data)
@@ -102,9 +102,19 @@ export class RegisterComponent {
             sessionStorage.setItem('refreshToken', response.data.data.refreshToken);
 
             let snackBarRef = this.snackBar.open('Account creation successful', 'x', {duration: 10000});
-
+            
+            axios.post('http://api.memorly.kro.kr/user', sessionStorage.getItem('accessToken'))
+              .then((response2)=> {
+                console.log(response);
+                console.log(response.data.data.user.name);
+                localStorage.setItem('username', response2.data.data.user.name);
+                localStorage.setItem('isLoggedIn', 'true');
+              })
+            .catch((error) => {
+              console.error(error);
+              let snackBarRef = this.snackBar.open('Error getting user name', 'x', {duration: 10000});
+            })
             this.router.navigateByUrl('library');
-
           })
           .catch((error) => {
             console.error(error);

@@ -50,17 +50,31 @@ export class LoginComponent {
     axios.post('http://api.memorly.kro.kr/users/login', data)
       .then((response) => {
         // Navigate to the home page or other protected routes
-        console.log(response);
+            console.log(response);
             console.log(response.data.data.accessToken);
             console.log(response.data.data.refreshToken);
 
-            // need to track jwt
+            // need to track jwts
             sessionStorage.setItem('accessToken', response.data.data.accessToken);
             sessionStorage.setItem('refreshToken', response.data.data.refreshToken);
 
             let snackBarRef = this.snackBar.open('Login successful', 'x', {duration: 10000});
+
+            axios.post('http://api.memorly.kro.kr/user', sessionStorage.getItem('accessToken'))
+              .then((response2)=> {
+                console.log(response2);
+                console.log(response2.data.data.user.name);
+                localStorage.setItem('username', response2.data.data.user.name);
+                localStorage.setItem('isLoggedIn', 'true');
+              })
+            .catch((error) => {
+              console.error(error);
+              if(error.response2.status >= 400){
+                let snackBarRef = this.snackBar.open('Error: ' + error.response2.message, 'x', {duration: 10000});
+              } 
+              //let snackBarRef = this.snackBar.open('Error getting user name', 'x', {duration: 10000});
+            })
             this.router.navigateByUrl('library');
-            
       })
       .catch((error) => {
         console.error(error);
