@@ -34,8 +34,11 @@ func CreateCard() gin.HandlerFunc {
 		}
 
 		var folder models.Folder
+		id, _ := c.Get("id")
 
-		err := folderCollection.FindOne(ctx, bson.M{"_id": card.FolderId}).Decode(&folder)
+		folderId, _ := primitive.ObjectIDFromHex(card.FolderId)
+
+		err := folderCollection.FindOne(ctx, bson.M{"_id": folderId, "creatorId": id}).Decode(&folder)
 		defer cancel()
 
 		if err != nil {
@@ -43,16 +46,21 @@ func CreateCard() gin.HandlerFunc {
 			return
 		}
 
-		id, _ := c.Get("id")
-		strId, _ := id.(string)
-		creatorId, _ := primitive.ObjectIDFromHex(strId)
+		var user models.User
+
+		err = userCollection.FindOne(ctx, bson.M{"_id": id}).Decode(&user)
+
+		if err != nil {
+			c.JSON(http.StatusNotFound, responses.Response{Status: http.StatusNotFound, Message: "Not valid User", Data: nil})
+			return
+		}
 
 		newCard := models.Card{
 			Id:        primitive.NewObjectID(),
 			FolderId:  folder.Id,
 			Question:  card.Question,
 			Answer:    card.Answer,
-			CreatorId: creatorId,
+			CreatorId: user.Id,
 		}
 
 		newCard.CreatedAt, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))

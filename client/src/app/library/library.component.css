@@ -1,27 +1,27 @@
-.center{
-    width: 75%;
-    margin: 10px auto;
-  }
+.center {
+  width: 75%;
+  margin: 10px auto;
+}
 
-  .main-div{
-    height: 40vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.main-div {
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  
-  .align-center {
-    flex: 1 1 auto;
-  }
+.align-center {
+  flex: 1 1 auto;
+}
 
-  .space-cards{
-    width: 80vh;
+.space-cards {
+  width: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  }
-  .side-button {
-      display: flex;
-      flex-direction: row;
-  }
+}
+
+.side-button {
+  display: flex;
+  flex-direction: row;
+}
