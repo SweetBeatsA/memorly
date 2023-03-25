@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import axios from 'axios';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
-
 import {Router} from '@angular/router';
 
 @Component({ 
@@ -15,16 +12,15 @@ export class CreateFolderComponent {
   constructor(private router: Router) {}
 
 
-    createFolder(name1 : string) {
+    createFolder(title : string) {
 
-        const data = { 
-          name: name1};
+        const data = { title };
 
         // Define the headers with the access token
         const headers = { Authorization: sessionStorage.getItem('accessToken') };
         
         // Make the POST request
-        axios.post('http://api.memorly.kro.kr/users/library', data, { headers })
+        axios.post('http://api.memorly.kro.kr/folder', data, { headers })
           .then(response => {
             // Request was successful, log the response data
             console.log(response.data);
@@ -36,9 +32,6 @@ export class CreateFolderComponent {
             // Request failed, log the error message
             console.error(error.message);
           });
-
-
-
     }
 
 
