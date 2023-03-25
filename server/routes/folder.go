@@ -11,5 +11,5 @@ func FolderRoute(router *gin.Engine) {
 	router.Use(middleware.Authenticate())
 	router.POST("/folder", controllers.CreateFolder())
 	router.GET("/folders", controllers.GetFolders())
-	// router.GET("/folders/:id", controllers.GetFolder())
+	router.GET("/folders/:id", controllers.GetFolder())
 }

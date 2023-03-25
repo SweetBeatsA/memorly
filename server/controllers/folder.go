@@ -104,3 +104,51 @@ func GetFolders() gin.HandlerFunc {
 		c.JSON(http.StatusOK, responses.Response{Status: http.StatusOK, Message: "Success", Data: map[string]interface{}{"folders": folders}})
 	}
 }
+
+func GetFolder() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+		var folder models.Folder
+		var cards []models.Card
+
+		id, _ := c.Get("id")
+		folderId, _ := primitive.ObjectIDFromHex(c.Param("id"))
+		err := folderCollection.FindOne(ctx, bson.M{"_id": folderId, "creatorId": id}).Decode(&folder)
+		defer cancel()
+
+		if err != nil {
+			c.JSON(http.StatusNotFound, responses.Response{Status: http.StatusNotFound, Message: "Failed to query folder", Data: nil})
+			return
+		}
+
+		cursor, err := cardCollection.Find(ctx, bson.M{"folderId": folderId})
+
+		if err != nil {
+			c.JSON(http.StatusNotFound, responses.Response{Status: http.StatusNotFound, Message: "Failed to query cards", Data: nil})
+			return
+		}
+		defer cursor.Close(ctx)
+
+		for cursor.Next(ctx) {
+			var card models.Card
+			err := cursor.Decode(&card)
+			if err != nil {
+				c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "Failed to decode card", Data: nil})
+				return
+			}
+			cards = append(cards, card)
+		}
+
+		folderMap := map[string]interface{}{
+			"id":        folder.Id,
+			"title":     folder.Title,
+			"cards":     cards,
+			"creatorId": folder.CreatorId,
+			"createdAt": folder.CreatedAt,
+			"updatedAt": folder.UpdatedAt,
+		}
+
+		c.JSON(http.StatusOK, responses.Response{Status: http.StatusOK, Message: "Success", Data: map[string]interface{}{"folder": folderMap}})
+	}
+}
