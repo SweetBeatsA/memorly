@@ -2,31 +2,24 @@ package controllers
 
 import (
 	"context"
-	// "fmt"
-	// "memorly/configs"
 	"memorly/configs"
 	"memorly/forms"
 
-	//"memorly/helpers"
 	"memorly/models"
 	"memorly/responses"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
-	//"github.com/go-playground/validator/v10"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
-	// "go.mongodb.org/mongo-driver/mongo"
-	// "golang.org/x/crypto/bcrypt"
 )
 
 var folderCollection *mongo.Collection = configs.GetCollection(configs.DB, "folders")
 
 func CreateFolder() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Your Implementation Should Go Here
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		var folder forms.CreateFolderForm
 
@@ -41,7 +34,17 @@ func CreateFolder() gin.HandlerFunc {
 			return
 		}
 
-		count, err := userCollection.CountDocuments(ctx, bson.M{"Title": folder.Title})
+		var user models.User
+
+		id, _ := c.Get("id")
+		err := userCollection.FindOne(ctx, bson.M{"_id": id}).Decode(&user)
+
+		if err != nil {
+			c.JSON(http.StatusNotFound, responses.Response{Status: http.StatusNotFound, Message: "Not valid User", Data: nil})
+			return
+		}
+
+		count, err := folderCollection.CountDocuments(ctx, bson.M{"title": folder.Title, "creatorId": user.Id})
 		defer cancel()
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "Error", Data: nil})
@@ -54,25 +57,21 @@ func CreateFolder() gin.HandlerFunc {
 		}
 
 		newFolder := models.Folder{
-			Id: primitive.NewObjectID(),
-			// CreatorId: primitive.ObjectID(),
-			//^ the above isnt working not sure how get the jwt token the ID and Creator ID since they already exist
-			//Also I might be wrong but I assume the ID is a new ID for the folder thats created so I made a new object ID for it
-			Title: folder.Title,
-			//Not sure if I need to include the created time and updated time
+			Id:        primitive.NewObjectID(),
+			Title:     folder.Title,
+			CreatorId: user.Id,
 		}
 
 		newFolder.CreatedAt, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
 		newFolder.UpdatedAt, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
-		//Again not sure if this is now the created and updated time
 
-		//_, err = folderCollection.InsertOne(ctx, newFolder)
+		_, err = folderCollection.InsertOne(ctx, newFolder)
 		defer cancel()
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.Response{Status: http.StatusInternalServerError, Message: "Database Error", Data: nil})
 			return
 		}
 
-		//Not sure what to check to make sure the folder was created
+		c.JSON(http.StatusCreated, responses.Response{Status: http.StatusCreated, Message: "Success", Data: map[string]interface{}{"id": newFolder.Id}})
 	}
 }
