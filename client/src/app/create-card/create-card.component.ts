@@ -21,7 +21,7 @@ export class CreateCardComponent {
       const data = { frontItems: this.frontItems, backItems: this.backItems };
 
       const headers = { Authorization: sessionStorage.getItem('accessToken') };
-      axios.post('http://api.memorly.kro.kr/users/create-card', data, { headers })
+      axios.post('http://api.memorly.kro.kr/users/card', data, { headers })
           .then(response => {
             // Request was successful, log the response data
             console.log(response.data);
