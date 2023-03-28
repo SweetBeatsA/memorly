@@ -23,6 +23,9 @@ export class LibraryComponent implements OnInit {
     });
   }
   goToFolder(folderId : any): void {
-    this.router.navigate(['http://api.memorly.kro.kr/card-view', folderId]);
+
+    localStorage.setItem("folderId", folderId)
+
+    this.router.navigateByUrl('card-view');
   }
 }

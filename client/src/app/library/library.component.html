@@ -6,7 +6,7 @@
 </div>
 
 <mat-grid-list cols="4" rowHeight="300px">
-  <mat-card *ngFor="let folder of folders" routerLink="['http://api.memorly.kro.kr/card-view', folder.id]"
+  <mat-card *ngFor="let folder of folders" 
     [style.width]="'25%'">
     <mat-icon>{{ folder.icon }}</mat-icon>
     <mat-card-content>
@@ -17,6 +17,9 @@
   </mat-card>
 </mat-grid-list>
 <!--
+
+
+  Alternate folder routing: routerLink="['http://memorly.kro.kr/card-view', folder.id]"
 <section>
 
     

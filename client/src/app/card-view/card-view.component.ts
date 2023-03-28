@@ -19,8 +19,14 @@ export class CardViewComponent {
     constructor(private http: HttpClient, private router:Router) { }
 
     ngOnInit(): void {
-        this.http.get('http://api.memorly.kro.kr/cards', { "headers": {"Authorization": sessionStorage.getItem('accessToken') || ""} }).subscribe((response: any) => {
+
+        const folderId = localStorage.getItem("folderId");
+
+        this.http.get('http://api.memorly.kro.kr/folders/' + folderId, { "headers": {"Authorization": sessionStorage.getItem('accessToken') || ""} }).subscribe((response: any) => {
+
+        console.log(response);
           this.cards = response.data.cards.map((card: any) => ({
+            
             //id: folder.id,
             //title: folder.title,
             //icon: folder.type === 'document' ? 'description' : 'folder'
