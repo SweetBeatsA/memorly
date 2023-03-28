@@ -1,0 +1,36 @@
+.cycleLeft {
+    position: fixed;
+    left: 350px;
+    top: 120px;
+}
+
+.cycleRight {
+    position: fixed;
+    right: 350px;
+    top: 120px;
+}
+
+.card-position {
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flip {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+}
+
+.position {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.spacing {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 10px
+}

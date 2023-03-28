@@ -1,4 +1,46 @@
+
+<!--Try to change this to display folder name-->
 <div class="p-2 text-center bg-light" style="margin-top: 58px;">
     <h2 class="mb-3">Card View</h2>
     
+</div>
+<!--
+    <div class="cycleLeft">
+        <button mat-raised-button color="primary" (click)="cycleLeft()"><-</button>
+    </div><div class="cycleRight">
+        <button mat-raised-button color="primary" (click)="cycleRight()">-></button>
+    </div>
+-->
+
+
+<div class="card-position">
+    <td style="text-align: center">
+        <mat-card [style.width.px]=600 [style.height.px]=350>
+        
+            
+        
+      
+      <mat-card-content> 
+    <div class="flip">
+        <button mat-raised-button (click)="flipCard()">Flip</button>
+    </div>
+        
+      </mat-card-content>
+
+    </mat-card>
+</div>
+
+
+<div class="position">
+    <div class="spacing">
+    <button mat-raised-button color="primary" (click)="cycleLeft()"><-</button>
+</div>
+<h2>
+    
+{{position + 1}} / {{size}}
+
+</h2>
+<div class="spacing">
+<button mat-raised-button color="primary" (click)="cycleRight()">-></button>
+</div>
 </div>
